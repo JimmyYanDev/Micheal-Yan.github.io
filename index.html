@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,126 +60,6 @@
 </header>
       <div class="outer">
         <section id="main">
-  
-    <article id="post-Dagger2学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/30/Dagger2学习笔记/" class="article-date">
-  <time datetime="2017-04-30T11:41:19.000Z" itemprop="datePublished">2017-04-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/30/Dagger2学习笔记/">Dagger2学习笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Dagger2学习笔记"><a href="#Dagger2学习笔记" class="headerlink" title="Dagger2学习笔记"></a>Dagger2学习笔记</h1><h2 id="一，什么是Dagger2"><a href="#一，什么是Dagger2" class="headerlink" title="一，什么是Dagger2"></a>一，什么是Dagger2</h2><p>官方的解释：</p>
-<p>A fast dependency injector for Android and Java.</p>
-<p>翻译过来就是说，Dagger2是Android和Java的一个快速依赖注入器。</p>
-<h2 id="二，Dagger2的简单使用"><a href="#二，Dagger2的简单使用" class="headerlink" title="二，Dagger2的简单使用"></a>二，Dagger2的简单使用</h2><p>举个例子，使用Dagger2向MainActivity中注入一个Student实例，然后调用Student对象的getName()方法获取它的name属性，并将它显示在TextView中。(此案例需要先配置Dagger2)</p>
-<p>首先创建一个Student类，并用@Inject注解标注它的构造器。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class Student &#123;</div><div class="line"></div><div class="line">    private String name;</div><div class="line"></div><div class="line">    @Inject</div><div class="line">    public Student() &#123;</div><div class="line">        this.name = &quot;I am a student.&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getName() &#123;</div><div class="line">        return name;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然后在MainActivity中，定义一个Student成员变量并用@Inject注解标注。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends Activity &#123;</div><div class="line"></div><div class="line">    @Inject</div><div class="line">    Student mStudent;</div><div class="line"></div><div class="line">    private TextView mTextView;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line"></div><div class="line">        mTextView = (TextView) findViewById(R.id.tv);</div><div class="line">        mTextView.setText(mStudent.getName());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>紧接着创建一个接口取名为MainActivityComponent，并用@Component注解标注它，再在其中定义一个抽象方法，方法名为inject，参数为MainActivity。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@Component</div><div class="line">public interface MainActivityComponent &#123;</div><div class="line"></div><div class="line">    void inject(MainActivity mainActivity);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>最后，先使用Android Studio的Build-Make Project一下，目的是使用Dagger2自动创建我们刚才定义的MainActivityComponent的实现类(DaggerMainActivityComponent.class)，再在MainActivity中添加几行代码（如下）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends Activity &#123;</div><div class="line"></div><div class="line">    @Inject</div><div class="line">    Student mStudent;</div><div class="line"></div><div class="line">    private TextView mTextView;</div><div class="line"></div><div class="line">    //新增代码</div><div class="line">    private MainActivityComponent mComponent;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line"></div><div class="line">        //新增代码</div><div class="line">        mComponent = DaggerMainActivityComponent.builder().build();</div><div class="line">        //新增代码</div><div class="line">        mComponent.inject(this);</div><div class="line"></div><div class="line">        mTextView = (TextView) findViewById(R.id.tv);</div><div class="line">        mTextView.setText(mStudent.getName());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果如下图</p>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbbjjprg5cj30aa0iot9a.jpg" alt=""></p>
-<h2 id="三，Dagger2原理解析"><a href="#三，Dagger2原理解析" class="headerlink" title="三，Dagger2原理解析"></a>三，Dagger2原理解析</h2><p>正常情况下我们创建一个对象的实例需要使用构造器new一个出来，使用Dagger2后，我们只需要使用@Inject注解标注需要初始化的成员变量即可。这就是使用Dagger2给我们带来的最直观的好处，即不用重复的去书写那些创建对象实例的方法。那Dagger2是怎么做到的呢？</p>
-<p>分析上面的例子，可以看到我们除了使用@Inject注解标注了需要初始化的成员变量，同时也使用@Inject注解标注了需要初始化的成员变量所依赖类的构造器，然后我们还使用@Component注解标注了我们自己创建的一个MainActivityComponent接口。最重要的是，在我们向MainActivity添加最后的几行代码之前，我们先Make Project了一下，使用Dagger2自动生成了MainActivityComponent的实现类。</p>
-<p>实际上，Dagger2就是通过Component来实现依赖注入的。</p>
-<ol>
-<li>我们使用@Inject注解标注了需要初始化的成员变量，这就是在告诉Dagger2这个成员变量需要初始化。</li>
-<li>我们使用@Inject注解标注了需要初始化的成员变量所依赖类的构造器，这就是在告诉Dagger2这个成员变量初始化的方法。</li>
-<li>我们使用@Component注解标注了我们自己创建的一个MainActivityComponent接口，就是在告诉Dagger2在哪个位置的成员变量需要初始化。(这里我们传入的参数是MainActivity，即在MainActivity中有成员变量需要初始化)</li>
-</ol>
-<p>在整个依赖注入的过程中，Component起到了一个纽带的作用。一方可以创建提供实例，而另一方需要实例来进行初始化，通过Component来将二者联系起来，从而实现依赖注解。</p>
-<h2 id="Dagger2几个常用的注解"><a href="#Dagger2几个常用的注解" class="headerlink" title="Dagger2几个常用的注解"></a>Dagger2几个常用的注解</h2><table>
-<thead>
-<tr>
-<th>注解</th>
-<th>介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>@Inject</td>
-<td></td>
-</tr>
-<tr>
-<td>@Module</td>
-<td></td>
-</tr>
-<tr>
-<td>@Provides</td>
-<td></td>
-</tr>
-<tr>
-<td>@Component</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/30/Dagger2学习笔记/" data-id="cj24movci0000kpbqdxqqks1u" class="article-share-link">Delen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-使用-XML-定义选项菜单" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/30/使用-XML-定义选项菜单/" class="article-date">
-  <time datetime="2017-04-30T11:41:19.000Z" itemprop="datePublished">2017-04-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/30/使用-XML-定义选项菜单/">使用 XML 定义选项菜单</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/30/使用-XML-定义选项菜单/" data-id="cj24movcm0001kpbq6svs6j1h" class="article-share-link">Delen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -216,7 +96,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/30/hello-world/" data-id="cj24movcp0002kpbqc34d1l4f" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/04/30/hello-world/" data-id="cj24uihd9000046bq8rqrdtaa" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -241,7 +121,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li></ul>
     </div>
@@ -251,17 +131,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2017/04/30/Dagger2学习笔记/">Dagger2学习笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/30/使用-XML-定义选项菜单/">使用 XML 定义选项菜单</a>
-          </li>
         
           <li>
             <a href="/2017/04/30/hello-world/">Hello World</a>
@@ -280,7 +152,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
