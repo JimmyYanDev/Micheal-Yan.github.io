@@ -1,0 +1,14 @@
+#robots.txt
+User-agent: *
+Allow: /
+Allow: /archives/
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+Sitemap: http://yanqinming.cn/search.xml
+Sitemap: http://yanqinming.cn/sitemap.xml
+Sitemap: http://yanqinming.cn/baidusitemap.xml
+
