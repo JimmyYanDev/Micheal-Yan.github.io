@@ -3,6 +3,28 @@
   
     
     <entry>
+      <title><![CDATA[Hexo博客搭建之SEO搜索优化]]></title>
+      <url>/posts/3bc7d02e/</url>
+      <content type="html"><![CDATA[<h2 id="什么是-SEO？"><a href="#什么是-SEO？" class="headerlink" title="什么是 SEO？"></a>什么是 SEO？</h2>]]></content>
+      
+        <categories>
+            
+            <category> Hexo </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Hexo博客搭建 </tag>
+            
+            <tag> SEO搜索优化 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[JDBC简单使用总结]]></title>
       <url>/posts/7933063e/</url>
       <content type="html"><![CDATA[<h2 id="什么是-JDBC？"><a href="#什么是-JDBC？" class="headerlink" title="什么是 JDBC？"></a>什么是 JDBC？</h2><p>JDBC 的全称是 Java Database Connectivity，即Java数据库连接，它是一种可以执行 SQL 语句的 Java API。</p>
