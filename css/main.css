@@ -1824,7 +1824,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #be5e65;
+  background: #7cb3de;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3169,4 +3169,20 @@ rgba(255,255,255,0.6)
 #yun-tie-sdk-wrap .single-tie .tie-time {
   transition: border-width 0.3s linear 0.1s, color 0.2s linear 0.3s;
   cursor: pointer;
+}
+code {
+  color: #ff7600;
+  background: #fbf7f8;
+  margin: 2px;
+}
+.highlight,
+pre {
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 3px;
+}
+.highlight,
+code,
+pre {
+  border: 1px solid #d6d6d6;
 }
