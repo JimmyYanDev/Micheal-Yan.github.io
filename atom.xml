@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yanqinming.cn/"/>
-  <updated>2017-08-14T13:49:51.000Z</updated>
+  <updated>2017-08-15T00:00:22.000Z</updated>
   <id>http://yanqinming.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yanqinming.cn/posts/cb6fd708/"/>
     <id>http://yanqinming.cn/posts/cb6fd708/</id>
     <published>2017-08-13T12:53:20.000Z</published>
-    <updated>2017-08-14T13:49:51.000Z</updated>
+    <updated>2017-08-15T00:00:22.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="我对正则表达式的理解"><a href="#我对正则表达式的理解" class="headerlink" title="我对正则表达式的理解"></a>我对正则表达式的理解</h2><p>正则表达式Regex(Regular Expression)，是一种通过定义由特定字符组成的表达式来对字符串进行匹配、查找、替换和切割的字符串操作工具。</p>
 <h2 id="正则表达式中特定的一些字符"><a href="#正则表达式中特定的一些字符" class="headerlink" title="正则表达式中特定的一些字符"></a>正则表达式中特定的一些字符</h2><table>
@@ -40,7 +40,7 @@
 <td style="text-align:left">字符 x</td>
 </tr>
 <tr>
-<td style="text-align:left">\</td>
+<td style="text-align:left">\\</td>
 <td style="text-align:left">反斜线字符</td>
 </tr>
 <tr>
